@@ -1,88 +1,75 @@
 import re
 
 
-def _change(input_str, old_inst, new_inst, old_surr_l, old_surr_r, new_surr_l, new_surr_r):
-    result = ""
-    i = 0
-    n = len(input_str)
+def _find_matching_bracket(text: str, start_index: int, open_bracket: str, close_bracket: str) -> int:
+    """
+    Finds the index of the matching closing bracket from a starting open bracket.
+    Handles nesting and escaped characters. Returns -1 if not found.
+    """
+    if start_index >= len(text) or text[start_index] != open_bracket:
+        return -1
 
-    while i < n:
-        if input_str[i : i + len(old_inst)] == old_inst:
-            # check if the old_inst is followed by old_surr_l
-            start = i + len(old_inst)
-        else:
-            result += input_str[i]
-            i += 1
+    balance = 1
+    i = start_index + 1
+    while i < len(text):
+        char = text[i]
+        # Basic escape handling: if we see a backslash, skip the next character
+        if char == "\\" and i + 1 < len(text):
+            i += 2
             continue
 
-        if start < n and input_str[start] == old_surr_l:
-            # found an old_inst followed by old_surr_l, now look for the matching old_surr_r
-            count = 1
-            j = start + 1
-            escaped = False
-            while j < n and count > 0:
-                if input_str[j] == "\\" and not escaped:
-                    escaped = True
-                    j += 1
-                    continue
-                if input_str[j] == old_surr_r and not escaped:
-                    count -= 1
-                    if count == 0:
-                        break
-                elif input_str[j] == old_surr_l and not escaped:
-                    count += 1
-                escaped = False
-                j += 1
+        if char == close_bracket:
+            balance -= 1
+        elif char == open_bracket:
+            balance += 1
 
-            if count == 0:
-                assert j < n
-                assert input_str[start] == old_surr_l
-                assert input_str[j] == old_surr_r
-                inner_content = input_str[start + 1 : j]
-                # Replace the content with new pattern
-                result += new_inst + new_surr_l + inner_content + new_surr_r
-                i = j + 1
-                continue
-            else:
-                assert count >= 1
-                assert j == n
-                print("Warning: unbalanced surrogate pair in input string")
-                result += new_inst + new_surr_l
-                i = start + 1
-                continue
-        else:
-            result += input_str[i:start]
-            i = start
-
-    if old_inst != new_inst and (old_inst + old_surr_l) in result:
-        return _change(result, old_inst, new_inst, old_surr_l, old_surr_r, new_surr_l, new_surr_r)
-    else:
-        return result
-
-
-def _find_substring_positions(string, substring):
-    positions = [match.start() for match in re.finditer(re.escape(substring), string)]
-    return positions
+        if balance == 0:
+            return i
+        i += 1
+    return -1  # Unmatched bracket
 
 
 def change_all(input_str, old_inst, new_inst, old_surr_l, old_surr_r, new_surr_l, new_surr_r):
-    pos = _find_substring_positions(input_str, old_inst + old_surr_l)
-    res = list(input_str)
-    for p in pos[::-1]:
-        res[p:] = list(
-            _change(
-                "".join(res[p:]), old_inst, new_inst, old_surr_l, old_surr_r, new_surr_l, new_surr_r
-            )
-        )
-    res = "".join(res)
-    return res
+    """
+    Recursively and efficiently replaces all occurrences of a LaTeX command
+    and its delimited content.
+    """
+    output_parts = []
+    last_end = 0
+
+    # Use regex to find all potential starts of the command.
+    # We must escape the command string in case it contains special regex characters.
+    pattern = re.compile(r"(?<!\\)" + re.escape(old_inst))
+
+    for match in pattern.finditer(input_str):
+        start_cmd = match.start()
+        start_arg = match.end()
+
+        # Check if the command is immediately followed by the opening delimiter.
+        if start_arg < len(input_str) and input_str[start_arg] == old_surr_l:
+            end_arg = _find_matching_bracket(input_str, start_arg, old_surr_l, old_surr_r)
+
+            if end_arg != -1:
+                # A complete, balanced pattern was found.
+                output_parts.append(input_str[last_end:start_cmd])
+
+                # Extract the inner content and recursively process it.
+                inner_content = input_str[start_arg + 1 : end_arg]
+                processed_inner = change_all(
+                    inner_content, old_inst, new_inst, old_surr_l, old_surr_r, new_surr_l, new_surr_r
+                )
+
+                output_parts.append(new_inst + new_surr_l + processed_inner + new_surr_r)
+                last_end = end_arg + 1
+
+    output_parts.append(input_str[last_end:])
+    return "".join(output_parts)
 
 
 def remove_style(input_str: str) -> str:
     input_str = change_all(input_str, r"\bm", r" ", r"{", r"}", r"", r" ")
     input_str = change_all(input_str, r"\boldsymbol", r" ", r"{", r"}", r"", r" ")
     input_str = change_all(input_str, r"\textit", r" ", r"{", r"}", r"", r" ")
-    input_str = change_all(input_str, r"\textbf", r" ", r"{", r"}", r"", r" ")
     input_str = change_all(input_str, r"\textbf", r" ", r"{", r"}", r"", r" ")
     input_str = change_all(input_str, r"\mathbf", r" ", r"{", r"}", r"", r" ")
     output_str = input_str.strip()
