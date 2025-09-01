@@ -18,7 +18,13 @@
 https://github.com/OleehyO/TexTeller/assets/56267907/532d1471-a72e-4960-9677-ec6c19db289f
 
 TexTeller is an end-to-end formula recognition model, capable of converting images into corresponding LaTeX formulas.
+## ℹ️ Attribution
 
+This project is **based on [TexTeller](https://github.com/OleehyO/TexTeller)**  
+by [OleehyO](https://github.com/OleehyO), licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+I have modified and extended the original codebase.  
+All changes from the original are documented in this repository.  
 TexTeller was trained with **80M image-formula pairs** (previous dataset can be obtained [here](https://huggingface.co/datasets/OleehyO/latex-formulas)), compared to [LaTeX-OCR](https://github.com/lukas-blecher/LaTeX-OCR) which used a 100K dataset, TexTeller has **stronger generalization abilities** and **higher accuracy**, covering most use cases.
 
 >[!NOTE]
