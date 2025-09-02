@@ -3,13 +3,11 @@ CLI entry point for TexTeller.
 """
 
 import time
-
 import click
 
 from texteller.cli.commands.inference import inference
 from texteller.cli.commands.launch import launch
 from texteller.cli.commands.web import web
-
 
 @click.group()
 def cli():

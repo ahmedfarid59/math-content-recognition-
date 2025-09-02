@@ -1,10 +1,7 @@
-"""
-CLI commands for launching server.
-"""
+"""CLI commands for launching server."""
 
 import sys
 import time
-
 import click
 from ray import serve
 from texteller.globals import Globals
