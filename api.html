@@ -426,33 +426,27 @@ document.write(`
 <dl class="py function">
 <dt class="sig sig-object py" id="texteller.api.img2latex">
 <span class="sig-name descname"><span class="pre">img2latex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">VisionEncoderDecoderModel</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ORTModelForVision2Seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">RobertaTokenizerFast</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><span class="pre">ndarray</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.pytorch.org/docs/stable/tensor_attributes.html#torch.device" title="(in PyTorch v2.8)"><span class="pre">device</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'latex'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'katex'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'latex'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1024</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_beams</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_repeat_ngram_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/texteller/api/inference.html#img2latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#texteller.api.img2latex" title="Link to this definition">#</a></dt>
-<dd><p>Convert images to LaTeX or KaTeX formatted strings.</p>
+<dd><p>Convert images to LaTeX or KaTeX formatted strings.
+:param model: The TexTeller or ORTModelForVision2Seq model instance
+:param tokenizer: The tokenizer for the model
+:param images: List of image paths or numpy arrays (RGB format)
+:param device: The torch device to use (defaults to available GPU or CPU)
+:param out_format: Output format, either “latex” or “katex”
+:param keep_style: Whether to keep the style of the LaTeX
+:param max_tokens: Maximum number of tokens to generate
+:param num_beams: Number of beams for beam search
+:param no_repeat_ngram_size: Size of n-grams to prevent repetition</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> – The TexTeller or ORTModelForVision2Seq model instance</p></li>
-<li><p><strong>tokenizer</strong> – The tokenizer for the model</p></li>
-<li><p><strong>images</strong> – List of image paths or numpy arrays (RGB format)</p></li>
-<li><p><strong>device</strong> – The torch device to use (defaults to available GPU or CPU)</p></li>
-<li><p><strong>out_format</strong> – Output format, either “latex” or “katex”</p></li>
-<li><p><strong>keep_style</strong> – Whether to keep the style of the LaTeX</p></li>
-<li><p><strong>max_tokens</strong> – Maximum number of tokens to generate</p></li>
-<li><p><strong>num_beams</strong> – Number of beams for beam search</p></li>
-<li><p><strong>no_repeat_ngram_size</strong> – Size of n-grams to prevent repetition</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of LaTeX or KaTeX strings corresponding to each input image</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of LaTeX or KaTeX strings corresponding to each input image</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">texteller</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_model</span><span class="p">,</span> <span class="n">load_tokenizer</span><span class="p">,</span> <span class="n">img2latex</span>
-<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_onnx</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">load_tokenizer</span><span class="p">(</span><span class="n">tokenizer_path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">img2latex</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;path/to/image.png&quot;</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">out_format</span><span class="o">=</span><span class="s2">&quot;katex&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -464,8 +458,8 @@ document.write(`
 <dl class="py function">
 <dt class="sig sig-object py" id="texteller.api.paragraph2md">
 <span class="sig-name descname"><span class="pre">paragraph2md</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">latexdet_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">InferenceSession</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textdet_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TextDetector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textrec_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TextRecognizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latexrec_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">VisionEncoderDecoderModel</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ORTModelForVision2Seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">RobertaTokenizerFast</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.pytorch.org/docs/stable/tensor_attributes.html#torch.device" title="(in PyTorch v2.8)"><span class="pre">device</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_beams</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="_modules/texteller/api/inference.html#paragraph2md"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#texteller.api.paragraph2md" title="Link to this definition">#</a></dt>
-<dd><p>Convert an image containing both text and mathematical formulas to markdown format.</p>
-<p>This function processes a mixed-content image by:
+<dd><p>Convert an image containing both text and mathematical formulas to markdown format.
+This function processes a mixed-content image by:
 1. Detecting mathematical formulas using a latex detection model
 2. Masking detected formula areas and detecting text regions using OCR
 3. Recognizing text in the detected regions
@@ -548,25 +542,22 @@ positions, classifications, and confidence scores</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="texteller.api.load_model">
 <span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_onnx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">VisionEncoderDecoderModel</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ORTModelForVision2Seq</span></span></span><a class="reference internal" href="_modules/texteller/api/load.html#load_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#texteller.api.load_model" title="Link to this definition">#</a></dt>
-<dd><p>Load the TexTeller model for LaTeX recognition.</p>
-<p>This function loads the main TexTeller model, which is responsible for
+<dd><p>Load the TexTeller model for LaTeX recognition.
+This function loads the main TexTeller model, which is responsible for
 converting images to LaTeX. It can load either the standard PyTorch model
-or the optimized ONNX version.</p>
+or the optimized ONNX version.
+:param model_dir: Directory containing the model files. If None, uses the default model.
+:param use_onnx: Whether to load the ONNX version of the model for faster inference.</p>
+<blockquote>
+<div><p>Requires the ‘optimum’ package and ONNX Runtime.</p>
+</div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model_dir</strong> – Directory containing the model files. If None, uses the default model.</p></li>
-<li><p><strong>use_onnx</strong> – Whether to load the ONNX version of the model for faster inference.
-Requires the ‘optimum’ package and ONNX Runtime.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Loaded TexTeller model instance</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Loaded TexTeller model instance</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">texteller</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_model</span>
-<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="n">use_onnx</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -575,20 +566,17 @@ Requires the ‘optimum’ package and ONNX Runtime.</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="texteller.api.load_tokenizer">
 <span class="sig-name descname"><span class="pre">load_tokenizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokenizer_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">RobertaTokenizerFast</span></span></span><a class="reference internal" href="_modules/texteller/api/load.html#load_tokenizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#texteller.api.load_tokenizer" title="Link to this definition">#</a></dt>
-<dd><p>Load the tokenizer for the TexTeller model.</p>
-<p>This function loads the tokenizer used by the TexTeller model for
-encoding and decoding LaTeX sequences.</p>
+<dd><p>Load the tokenizer for the TexTeller model.
+This function loads the tokenizer used by the TexTeller model for
+encoding and decoding LaTeX sequences.
+:param tokenizer_dir: Directory containing the tokenizer files. If None, uses the default tokenizer.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tokenizer_dir</strong> – Directory containing the tokenizer files. If None, uses the default tokenizer.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>RobertaTokenizerFast instance</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>RobertaTokenizerFast instance</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">texteller</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tokenizer</span>
-<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">load_tokenizer</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -597,17 +585,12 @@ encoding and decoding LaTeX sequences.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="texteller.api.load_latexdet_model">
 <span class="sig-name descname"><span class="pre">load_latexdet_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">InferenceSession</span></span></span><a class="reference internal" href="_modules/texteller/api/load.html#load_latexdet_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#texteller.api.load_latexdet_model" title="Link to this definition">#</a></dt>
-<dd><p>Load the LaTeX detection model.</p>
-<p>This function loads the model responsible for detecting LaTeX formulas in images.
-The model is implemented as an ONNX InferenceSession for optimal performance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ONNX InferenceSession for LaTeX detection</p>
-</dd>
-</dl>
+<dd><p>Load the LaTeX detection model.
+This function loads the model responsible for detecting LaTeX formulas in images.
+The model is implemented as an ONNX InferenceSession for optimal performance.
+:returns: ONNX InferenceSession for LaTeX detection</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">texteller</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_latexdet_model</span>
-<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">detector</span> <span class="o">=</span> <span class="n">load_latexdet_model</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -616,17 +599,12 @@ The model is implemented as an ONNX InferenceSession for optimal performance.</p
 <dl class="py function">
 <dt class="sig sig-object py" id="texteller.api.load_textdet_model">
 <span class="sig-name descname"><span class="pre">load_textdet_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TextDetector</span></span></span><a class="reference internal" href="_modules/texteller/api/load.html#load_textdet_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#texteller.api.load_textdet_model" title="Link to this definition">#</a></dt>
-<dd><p>Load the text detection model.</p>
-<p>This function loads the model responsible for detecting text regions in images.
-It’s based on PaddleOCR’s text detection model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>PaddleOCR TextDetector instance</p>
-</dd>
-</dl>
+<dd><p>Load the text detection model.
+This function loads the model responsible for detecting text regions in images.
+It’s based on PaddleOCR’s text detection model.
+:returns: PaddleOCR TextDetector instance</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">texteller</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_textdet_model</span>
-<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">text_detector</span> <span class="o">=</span> <span class="n">load_textdet_model</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -635,17 +613,12 @@ It’s based on PaddleOCR’s text detection model.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="texteller.api.load_textrec_model">
 <span class="sig-name descname"><span class="pre">load_textrec_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TextRecognizer</span></span></span><a class="reference internal" href="_modules/texteller/api/load.html#load_textrec_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#texteller.api.load_textrec_model" title="Link to this definition">#</a></dt>
-<dd><p>Load the text recognition model.</p>
-<p>This function loads the model responsible for recognizing regular text in images.
-It’s based on PaddleOCR’s text recognition model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>PaddleOCR TextRecognizer instance</p>
-</dd>
-</dl>
+<dd><p>Load the text recognition model.
+This function loads the model responsible for recognizing regular text in images.
+It’s based on PaddleOCR’s text recognition model.
+:returns: PaddleOCR TextRecognizer instance</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">texteller</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_textrec_model</span>
-<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">text_recognizer</span> <span class="o">=</span> <span class="n">load_textrec_model</span><span class="p">()</span>
 </pre></div>
 </div>

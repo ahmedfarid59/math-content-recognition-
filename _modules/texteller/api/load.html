@@ -312,11 +312,9 @@ document.write(`
                   
   <h1>Source code for texteller.api.load</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">wget</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">onnxruntime</span><span class="w"> </span><span class="kn">import</span> <span class="n">InferenceSession</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">RobertaTokenizerFast</span>
-
 <span class="kn">from</span><span class="w"> </span><span class="nn">texteller.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">LATEX_DET_MODEL_URL</span><span class="p">,</span> <span class="n">TEXT_DET_MODEL_URL</span><span class="p">,</span> <span class="n">TEXT_REC_MODEL_URL</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">texteller.globals</span><span class="w"> </span><span class="kn">import</span> <span class="n">Globals</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">texteller.logger</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
@@ -328,160 +326,130 @@ document.write(`
 
 <span class="n">_logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-
 <div class="viewcode-block" id="load_model">
 <a class="viewcode-back" href="../../../api.html#texteller.api.load_model">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_model</span><span class="p">(</span><span class="n">model_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use_onnx</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TexTellerModel</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Load the TexTeller model for LaTeX recognition.</span>
-
-<span class="sd">    This function loads the main TexTeller model, which is responsible for</span>
-<span class="sd">    converting images to LaTeX. It can load either the standard PyTorch model</span>
-<span class="sd">    or the optimized ONNX version.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        model_dir: Directory containing the model files. If None, uses the default model.</span>
-<span class="sd">        use_onnx: Whether to load the ONNX version of the model for faster inference.</span>
-<span class="sd">                  Requires the &#39;optimum&#39; package and ONNX Runtime.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Loaded TexTeller model instance</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; from texteller import load_model</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; model = load_model(use_onnx=True)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">TexTeller</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">use_onnx</span><span class="o">=</span><span class="n">use_onnx</span><span class="p">)</span></div>
-
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Load the TexTeller model for LaTeX recognition.</span>
+<span class="sd">	This function loads the main TexTeller model, which is responsible for</span>
+<span class="sd">	converting images to LaTeX. It can load either the standard PyTorch model</span>
+<span class="sd">	or the optimized ONNX version.</span>
+<span class="sd">	Args:</span>
+<span class="sd">		model_dir: Directory containing the model files. If None, uses the default model.</span>
+<span class="sd">		use_onnx: Whether to load the ONNX version of the model for faster inference.</span>
+<span class="sd">				  Requires the &#39;optimum&#39; package and ONNX Runtime.</span>
+<span class="sd">	Returns:</span>
+<span class="sd">		Loaded TexTeller model instance</span>
+<span class="sd">	Example:</span>
+<span class="sd">		&gt;&gt;&gt; from texteller import load_model</span>
+<span class="sd">		&gt;&gt;&gt; model = load_model(use_onnx=True)</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">return</span> <span class="n">TexTeller</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">use_onnx</span><span class="o">=</span><span class="n">use_onnx</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="load_tokenizer">
 <a class="viewcode-back" href="../../../api.html#texteller.api.load_tokenizer">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_tokenizer</span><span class="p">(</span><span class="n">tokenizer_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RobertaTokenizerFast</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Load the tokenizer for the TexTeller model.</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Load the tokenizer for the TexTeller model.</span>
+<span class="sd">	This function loads the tokenizer used by the TexTeller model for</span>
+<span class="sd">	encoding and decoding LaTeX sequences.</span>
+<span class="sd">	Args:</span>
+<span class="sd">		tokenizer_dir: Directory containing the tokenizer files. If None, uses the default tokenizer.</span>
+<span class="sd">	Returns:</span>
+<span class="sd">		RobertaTokenizerFast instance</span>
 
-<span class="sd">    This function loads the tokenizer used by the TexTeller model for</span>
-<span class="sd">    encoding and decoding LaTeX sequences.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        tokenizer_dir: Directory containing the tokenizer files. If None, uses the default tokenizer.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        RobertaTokenizerFast instance</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; from texteller import load_tokenizer</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; tokenizer = load_tokenizer()</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">TexTeller</span><span class="o">.</span><span class="n">get_tokenizer</span><span class="p">(</span><span class="n">tokenizer_dir</span><span class="p">)</span></div>
-
+<span class="sd">	Example:</span>
+<span class="sd">		&gt;&gt;&gt; from texteller import load_tokenizer</span>
+<span class="sd">		&gt;&gt;&gt; tokenizer = load_tokenizer()</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">return</span> <span class="n">TexTeller</span><span class="o">.</span><span class="n">get_tokenizer</span><span class="p">(</span><span class="n">tokenizer_dir</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="load_latexdet_model">
 <a class="viewcode-back" href="../../../api.html#texteller.api.load_latexdet_model">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_latexdet_model</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">InferenceSession</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Load the LaTeX detection model.</span>
-
-<span class="sd">    This function loads the model responsible for detecting LaTeX formulas in images.</span>
-<span class="sd">    The model is implemented as an ONNX InferenceSession for optimal performance.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        ONNX InferenceSession for LaTeX detection</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; from texteller import load_latexdet_model</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; detector = load_latexdet_model()</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">fpath</span> <span class="o">=</span> <span class="n">_maybe_download</span><span class="p">(</span><span class="n">LATEX_DET_MODEL_URL</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">InferenceSession</span><span class="p">(</span>
-        <span class="n">resolve_path</span><span class="p">(</span><span class="n">fpath</span><span class="p">),</span>
-        <span class="n">providers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CUDAExecutionProvider&quot;</span> <span class="k">if</span> <span class="n">cuda_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;CPUExecutionProvider&quot;</span><span class="p">],</span>
-    <span class="p">)</span></div>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Load the LaTeX detection model.</span>
+<span class="sd">	This function loads the model responsible for detecting LaTeX formulas in images.</span>
+<span class="sd">	The model is implemented as an ONNX InferenceSession for optimal performance.</span>
+<span class="sd">	Returns:</span>
+<span class="sd">		ONNX InferenceSession for LaTeX detection</span>
+<span class="sd">	Example:</span>
+<span class="sd">		&gt;&gt;&gt; from texteller import load_latexdet_model</span>
+<span class="sd">		&gt;&gt;&gt; detector = load_latexdet_model()</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">fpath</span> <span class="o">=</span> <span class="n">_maybe_download</span><span class="p">(</span><span class="n">LATEX_DET_MODEL_URL</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">InferenceSession</span><span class="p">(</span>
+		<span class="n">resolve_path</span><span class="p">(</span><span class="n">fpath</span><span class="p">),</span>
+		<span class="n">providers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CUDAExecutionProvider&quot;</span> <span class="k">if</span> <span class="n">cuda_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;CPUExecutionProvider&quot;</span><span class="p">],</span>
+	<span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="load_textrec_model">
 <a class="viewcode-back" href="../../../api.html#texteller.api.load_textrec_model">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_textrec_model</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">predict_rec</span><span class="o">.</span><span class="n">TextRecognizer</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Load the text recognition model.</span>
-
-<span class="sd">    This function loads the model responsible for recognizing regular text in images.</span>
-<span class="sd">    It&#39;s based on PaddleOCR&#39;s text recognition model.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        PaddleOCR TextRecognizer instance</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; from texteller import load_textrec_model</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; text_recognizer = load_textrec_model()</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">fpath</span> <span class="o">=</span> <span class="n">_maybe_download</span><span class="p">(</span><span class="n">TEXT_REC_MODEL_URL</span><span class="p">)</span>
-    <span class="n">paddleocr_args</span> <span class="o">=</span> <span class="n">parse_args</span><span class="p">()</span>
-    <span class="n">paddleocr_args</span><span class="o">.</span><span class="n">use_onnx</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">paddleocr_args</span><span class="o">.</span><span class="n">rec_model_dir</span> <span class="o">=</span> <span class="n">resolve_path</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
-    <span class="n">paddleocr_args</span><span class="o">.</span><span class="n">use_gpu</span> <span class="o">=</span> <span class="n">cuda_available</span><span class="p">()</span>
-    <span class="n">predictor</span> <span class="o">=</span> <span class="n">predict_rec</span><span class="o">.</span><span class="n">TextRecognizer</span><span class="p">(</span><span class="n">paddleocr_args</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">predictor</span></div>
-
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Load the text recognition model.</span>
+<span class="sd">	This function loads the model responsible for recognizing regular text in images.</span>
+<span class="sd">	It&#39;s based on PaddleOCR&#39;s text recognition model.</span>
+<span class="sd">	Returns:</span>
+<span class="sd">		PaddleOCR TextRecognizer instance</span>
+<span class="sd">	Example:</span>
+<span class="sd">		&gt;&gt;&gt; from texteller import load_textrec_model</span>
+<span class="sd">		&gt;&gt;&gt; text_recognizer = load_textrec_model()</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">fpath</span> <span class="o">=</span> <span class="n">_maybe_download</span><span class="p">(</span><span class="n">TEXT_REC_MODEL_URL</span><span class="p">)</span>
+	<span class="n">paddleocr_args</span> <span class="o">=</span> <span class="n">parse_args</span><span class="p">()</span>
+	<span class="n">paddleocr_args</span><span class="o">.</span><span class="n">use_onnx</span> <span class="o">=</span> <span class="kc">True</span>
+	<span class="n">paddleocr_args</span><span class="o">.</span><span class="n">rec_model_dir</span> <span class="o">=</span> <span class="n">resolve_path</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+	<span class="n">paddleocr_args</span><span class="o">.</span><span class="n">use_gpu</span> <span class="o">=</span> <span class="n">cuda_available</span><span class="p">()</span>
+	<span class="n">predictor</span> <span class="o">=</span> <span class="n">predict_rec</span><span class="o">.</span><span class="n">TextRecognizer</span><span class="p">(</span><span class="n">paddleocr_args</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">predictor</span></div>
 
 
 <div class="viewcode-block" id="load_textdet_model">
 <a class="viewcode-back" href="../../../api.html#texteller.api.load_textdet_model">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_textdet_model</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">predict_det</span><span class="o">.</span><span class="n">TextDetector</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Load the text detection model.</span>
-
-<span class="sd">    This function loads the model responsible for detecting text regions in images.</span>
-<span class="sd">    It&#39;s based on PaddleOCR&#39;s text detection model.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        PaddleOCR TextDetector instance</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; from texteller import load_textdet_model</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; text_detector = load_textdet_model()</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">fpath</span> <span class="o">=</span> <span class="n">_maybe_download</span><span class="p">(</span><span class="n">TEXT_DET_MODEL_URL</span><span class="p">)</span>
-    <span class="n">paddleocr_args</span> <span class="o">=</span> <span class="n">parse_args</span><span class="p">()</span>
-    <span class="n">paddleocr_args</span><span class="o">.</span><span class="n">use_onnx</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">paddleocr_args</span><span class="o">.</span><span class="n">det_model_dir</span> <span class="o">=</span> <span class="n">resolve_path</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
-    <span class="n">paddleocr_args</span><span class="o">.</span><span class="n">use_gpu</span> <span class="o">=</span> <span class="n">cuda_available</span><span class="p">()</span>
-    <span class="n">predictor</span> <span class="o">=</span> <span class="n">predict_det</span><span class="o">.</span><span class="n">TextDetector</span><span class="p">(</span><span class="n">paddleocr_args</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">predictor</span></div>
-
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Load the text detection model.</span>
+<span class="sd">	This function loads the model responsible for detecting text regions in images.</span>
+<span class="sd">	It&#39;s based on PaddleOCR&#39;s text detection model.</span>
+<span class="sd">	Returns:</span>
+<span class="sd">		PaddleOCR TextDetector instance</span>
+<span class="sd">	Example:</span>
+<span class="sd">		&gt;&gt;&gt; from texteller import load_textdet_model</span>
+<span class="sd">		&gt;&gt;&gt; text_detector = load_textdet_model()</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">fpath</span> <span class="o">=</span> <span class="n">_maybe_download</span><span class="p">(</span><span class="n">TEXT_DET_MODEL_URL</span><span class="p">)</span>
+	<span class="n">paddleocr_args</span> <span class="o">=</span> <span class="n">parse_args</span><span class="p">()</span>
+	<span class="n">paddleocr_args</span><span class="o">.</span><span class="n">use_onnx</span> <span class="o">=</span> <span class="kc">True</span>
+	<span class="n">paddleocr_args</span><span class="o">.</span><span class="n">det_model_dir</span> <span class="o">=</span> <span class="n">resolve_path</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+	<span class="n">paddleocr_args</span><span class="o">.</span><span class="n">use_gpu</span> <span class="o">=</span> <span class="n">cuda_available</span><span class="p">()</span>
+	<span class="n">predictor</span> <span class="o">=</span> <span class="n">predict_det</span><span class="o">.</span><span class="n">TextDetector</span><span class="p">(</span><span class="n">paddleocr_args</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">predictor</span></div>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_maybe_download</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dirpath</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Download a file if it doesn&#39;t already exist.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        url: URL to download from</span>
-<span class="sd">        dirpath: Directory to save the file in. If None, uses the default cache directory.</span>
-<span class="sd">        force: Whether to force download even if the file already exists</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Path to the downloaded file</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">dirpath</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">dirpath</span> <span class="o">=</span> <span class="n">Globals</span><span class="p">()</span><span class="o">.</span><span class="n">cache_dir</span>
-    <span class="n">mkdir</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span>
-
-    <span class="n">fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
-    <span class="n">fpath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span> <span class="o">/</span> <span class="n">fname</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">fpath</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span> <span class="n">force</span><span class="p">:</span>
-        <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloading </span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">fpath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">wget</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">resolve_path</span><span class="p">(</span><span class="n">fpath</span><span class="p">))</span>
-
-    <span class="k">return</span> <span class="n">fpath</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Download a file if it doesn&#39;t already exist.</span>
+<span class="sd">	Args:</span>
+<span class="sd">		url: URL to download from</span>
+<span class="sd">		dirpath: Directory to save the file in. If None, uses the default cache directory.</span>
+<span class="sd">		force: Whether to force download even if the file already exists</span>
+<span class="sd">	Returns:</span>
+<span class="sd">		Path to the downloaded file</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">if</span> <span class="n">dirpath</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+		<span class="n">dirpath</span> <span class="o">=</span> <span class="n">Globals</span><span class="p">()</span><span class="o">.</span><span class="n">cache_dir</span>
+	<span class="n">mkdir</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span>
+	<span class="n">fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+	<span class="n">fpath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span> <span class="o">/</span> <span class="n">fname</span>
+	<span class="k">if</span> <span class="ow">not</span> <span class="n">fpath</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span> <span class="n">force</span><span class="p">:</span>
+		<span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloading </span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">fpath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+		<span class="n">wget</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">resolve_path</span><span class="p">(</span><span class="n">fpath</span><span class="p">))</span>
+	<span class="k">return</span> <span class="n">fpath</span>
 </pre></div>
 
                 </article>
